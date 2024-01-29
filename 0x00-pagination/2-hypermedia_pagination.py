@@ -60,10 +60,10 @@ class Server:
             s = 0
             n = None
         return {
-			"page_size": s,
+            "page_size": s,
             "page": page,
             "data": self.get_page(page, page_size),
             "next_page": n,
             "prev_page": p,
             "total_pages": (len(self.dataset()) + page_size - 1) // page_size
-		}
+        }
