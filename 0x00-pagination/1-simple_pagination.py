@@ -40,4 +40,5 @@ class Server:
         s = t[0]
         d = t[1]
         print(type(s))
-        return([self.dataset()[s, d]])
+        data = self.dataset()
+        return([data[s, d]])
