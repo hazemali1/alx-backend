@@ -40,4 +40,10 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-            pass
+        """get the hyper index"""
+        return {
+            "index": index,
+            "next_index": index + page_size,
+            "page_size": page_size,
+            "data": self.__dataset[index:index + page_size]
+        }
