@@ -41,7 +41,6 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """get the hyper index"""
-        index = index + 1
         return {
             "index": index,
             "next_index": index + page_size,
