@@ -40,4 +40,4 @@ class Server:
         s = t[0]
         d = t[1]
         data = self.dataset()
-        return [data[s, d]]
+        return [data[s:d]]
