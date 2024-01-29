@@ -47,6 +47,7 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10):
         """get hyper"""
+        s = page_size
         if page + 1 < len(self.dataset()):
             n = page + 1
         else:
@@ -56,10 +57,10 @@ class Server:
         else:
             p = page - 1
         if len(self.get_page(page, page_size)) == 0:
-            page_size = 0
+            s = 0
             n = None
         return {
-			"page_size": page_size,
+			"page_size": s,
             "page": page,
             "data": self.get_page(page, page_size),
             "next_page": n,
