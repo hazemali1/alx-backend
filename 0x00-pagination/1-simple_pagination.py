@@ -34,4 +34,6 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """get page"""
         assert isinstance(page, int) and page > 0 and isinstance(page_size, int) and page_size > 0
-        print([self.dataset()[index_range(page, page_size)[0], index_range(page, page_size)[1]]])
+        if index_range(page, page_size)[0] > len(self.dataset) or index_range(page, page_size)[1] > len(self.dataset):
+            return []
+        return([self.dataset()[index_range(page, page_size)[0], index_range(page, page_size)[1]]])
