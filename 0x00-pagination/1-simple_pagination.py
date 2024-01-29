@@ -39,6 +39,5 @@ class Server:
         t = index_range(page, page_size)
         s = t[0]
         d = t[1]
-        print(type(s))
         data = self.dataset()
         return([data[s, d]])
