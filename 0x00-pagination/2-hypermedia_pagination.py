@@ -55,6 +55,9 @@ class Server:
             p = None
         else:
             p = page - 1
+        if len(self.get_page(page, page_size)) == 0:
+            page_size = 0
+            n = None
         return {
 			"page_size": page_size,
             "page": page,
@@ -63,4 +66,3 @@ class Server:
             "prev_page": p,
             "total_pages": (len(self.dataset()) + page_size - 1) // page_size
 		}
-
