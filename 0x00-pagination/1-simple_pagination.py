@@ -36,6 +36,8 @@ class Server:
         assert isinstance(page, int) and page > 0 and isinstance(page_size, int) and page_size > 0
         if index_range(page, page_size)[0] > len(self.dataset()) or index_range(page, page_size)[1] > len(self.dataset()):
             return []
-        s = index_range(page, page_size)[0]
-        d = index_range(page, page_size)[1]
+        t = index_range(page, page_size)
+        s = t[0]
+        d = t[1]
+        print(s, d)
         return([self.dataset()[s, d]])
