@@ -6,6 +6,7 @@ from base_caching import BaseCaching
 class LFUCache(BaseCaching):
     """LFUCache caching implementation"""
     dic = {}
+
     def put(self, key, item):
         """put data into the cache"""
         if key and item and len(self.cache_data) < self.MAX_ITEMS:
