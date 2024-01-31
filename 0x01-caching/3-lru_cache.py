@@ -22,4 +22,7 @@ class LRUCache(BaseCaching):
         """get data from the cache"""
         if key is None or key not in self.cache_data.keys():
             return None
+        v = self.cache_data[key]
+        self.cache_data.pop(key)
+        self.cache_data[key] = v
         return self.cache_data[key]
