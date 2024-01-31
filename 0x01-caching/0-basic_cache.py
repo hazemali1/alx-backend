@@ -1,17 +1,18 @@
 #!/usr/bin/python3
-"""import class"""
+"""  Basic dictionary """
 from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
-    """Basic"""
+    """ Class that inherits from BaseCaching and is a caching system
+        This caching system doesn’t have limit """
     def put(self, key, item):
-        """put data"""
+        """ Assign to the dictionary """
         if key and item:
             self.cache_data[key] = item
 
     def get(self, key):
-        """get data"""
+        """ Return the value linked """
         if key is None or self.cache_data.get(key) is None:
             return None
         return self.cache_data.get(key)
