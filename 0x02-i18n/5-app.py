@@ -1,7 +1,43 @@
 #!/usr/bin/env python3
-"""flask"""
-from flask import Flask, render_template, request, g
+"""
+A Basic flask application
+"""
+from typing import (
+    Dict, Union
+)
+
+from flask import Flask
+from flask import g, request
+from flask import render_template
 from flask_babel import Babel
+
+
+class Config(object):
+    """
+    Application configuration class
+    """
+    LANGUAGES = ['en', 'fr']
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
+
+
+# Instantiate the application object
+app = Flask(__name__)
+app.config.from_object(Config)
+
+# Wrap the application with Babel
+babel = Babel(app)
+
+
+@babel.localeselector
+def get_locale() -> str:
+    """
+    Gets locale from request object
+    """
+    locale = request.args.get('locale', '').strip()
+    if locale and locale in Config.LANGUAGES:
+        return locale
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 users = {
@@ -11,51 +47,33 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
-app = Flask(__name__)
 
-
-class Config():
-    """Config class"""
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = "UTC"
-
-
-app.config.from_object(Config)
-babel = Babel(app)
-
-
-@babel.localeselector
-def get_locale():
-    """accept languages"""
-    args = request.args.items()
-    for k, v in args:
-        if k == "locale" and v in app.config['LANGUAGES']:
-            return v
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
-@app.route("/")
-def index():
-    """index html"""
-    return render_template("5-index.html")
-
-
-def get_user():
-    """user"""
-    args = request.args.items()
-    for k, v in args:
-        if k == "login_as" and v in list(str(users.keys())):
-            return users[int(v)]
-    return None
+def get_user(id) -> Union[Dict[str, Union[str, None]], None]:
+    """
+    Validate user login details
+    Args:
+        id (str): user id
+    Returns:
+        (Dict): user dictionary if id is valid else None
+    """
+    return users.get(int(id), 0)
 
 
 @app.before_request
 def before_request():
-    """before request"""
-    g.user = get_user()
+    """
+    Adds valid user to the global session object `g`
+    """
+    setattr(g, 'user', get_user(request.args.get('login_as', 0)))
+
+
+@app.route('/', strict_slashes=False)
+def index() -> str:
+    """
+    Renders a basic html template
+    """
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
-    """main"""
-    app.run(debug=True)
+    app.run()
