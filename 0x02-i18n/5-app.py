@@ -2,7 +2,6 @@
 '''Task 4: Force locale with URL parameter
 '''
 
-from typing import Dict, Union
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 
@@ -29,7 +28,7 @@ users = {
 }
 
 
-def get_user() -> Union[Dict, None]:
+def get_user():
     """Retrieves a user based on a user id.
     """
     login_id = request.args.get('login_as')
@@ -39,7 +38,7 @@ def get_user() -> Union[Dict, None]:
 
 
 @app.before_request
-def before_request() -> None:
+def before_request():
     """Performs some routines before each request's resolution.
     """
 
@@ -47,7 +46,7 @@ def before_request() -> None:
 
 
 @babel.localeselector
-def get_locale() -> str:
+def get_locale():
     """Retrieves the locale for a web page.
 
     Returns:
@@ -60,7 +59,7 @@ def get_locale() -> str:
 
 
 @app.route('/')
-def index() -> str:
+def index():
     '''default route
 
     Returns:
