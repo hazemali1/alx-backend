@@ -28,6 +28,7 @@ babel = Babel(app)
 
 
 def check(t):
+    """check valid timezone"""
     try:
         pytz.timezone(t)
         return True
