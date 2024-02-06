@@ -21,7 +21,7 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale():
     """accept languages"""
-    pass
+    return "no"
 
 @app.route("/")
 def index():
