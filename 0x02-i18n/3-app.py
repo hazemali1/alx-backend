@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """flask"""
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext
+from flask_babel import Babel
 
 
 app = Flask(__name__)
@@ -26,9 +26,7 @@ def get_locale():
 @app.route("/")
 def index():
     """index html"""
-    home_title = gettext("home_title")
-    home_header = gettext("home_header")
-    return render_template("3-index.html", home_title=home_title, home_header=home_header)
+    return render_template("3-index.html")
 
 
 if __name__ == '__main__':
