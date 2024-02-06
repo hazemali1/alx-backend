@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 class Config():
     """Config class"""
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
+    LANGUAGES = ["fr"]
+    BABEL_DEFAULT_LOCALE = "fr"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
