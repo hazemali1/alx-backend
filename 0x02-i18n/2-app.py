@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""flask"""
+"""
+0. Basic Flask app
+"""
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
 class Config:
-    """Config class"""
+    """Configuration class"""
     LANGUAGES = ["en", "fr"]
     Babel_default_locale = "en"
     Babel_default_timezone = "UTC"
@@ -18,15 +20,16 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    """accept languages"""
+    """get Configuration variable"""
     return request.request.accept_languages.best_match(app.config['LANGUAGES'])
 
 @app.route('/')
 def index():
-    """index html"""
+    """
+    0. Basic Flask app
+    """
     return render_template('1-index.html')
 
 
 if __name__ == '__main__':
-    """main"""
     app.run(debug=True)
