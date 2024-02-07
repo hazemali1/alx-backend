@@ -74,10 +74,10 @@ def get_user():
 def before_request():
     """call function before request"""
     g.user = get_user()
-    local = Locale.parse('Europe/Paris')
-    print(local)
-    g.timezone = dates.format_datetime(datetime.now())
-    print(g.timezone)
+    local = "EN"
+    if get_timezone() == "Europe/Paris":
+        local = "FR"
+    g.timezone = dates.format_datetime(datetime.now(), locale=local)
 
 
 @babel.timezoneselector
